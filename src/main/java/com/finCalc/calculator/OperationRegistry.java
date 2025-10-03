@@ -90,6 +90,7 @@ public class OperationRegistry {
 
         // Options Trading operations
         registerOperation(AnnualizedOptionReturn.INSTANCE);
+        registerOperation(CoveredCallReturn.INSTANCE);
     }
 
     /**
