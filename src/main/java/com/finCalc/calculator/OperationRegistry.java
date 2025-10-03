@@ -87,6 +87,9 @@ public class OperationRegistry {
         registerOperation(EffectiveTaxRate.INSTANCE);
         registerOperation(AfterTaxReturn.INSTANCE);
         registerOperation(RequiredMinimumDistribution.INSTANCE);
+
+        // Options Trading operations
+        registerOperation(AnnualizedOptionReturn.INSTANCE);
     }
 
     /**

@@ -26,7 +26,18 @@
       "Bash(gh repo clone:*)",
       "Bash(git init:*)",
       "Bash(git remote add:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh label create:*)",
+      "Bash(for:*)",
+      "Bash(do grep -c \"@Test\" \"src/test/java/com/finCalc/calculator/operations/financial/$file\")",
+      "Bash(done)",
+      "Bash(awk:*)",
+      "Bash(bc)",
+      "Bash(gh issue close:*)",
+      "Bash(do gh issue close $i --comment \"All tests have been implemented and are passing. Test coverage is now 100% (53/53 operations tested).\")"
     ],
     "deny": [],
     "ask": []

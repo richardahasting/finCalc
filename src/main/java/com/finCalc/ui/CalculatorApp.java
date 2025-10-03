@@ -588,7 +588,7 @@ public class CalculatorApp extends Application {
         button.setPrefSize(width, 50);
 
         // Use smaller font for longer labels
-        int fontSize = text.length() > 3 ? 11 : 14;
+        int fontSize = text.length() > 3 ? 12 : 14;
         button.setFont(Font.font("System", FontWeight.BOLD, fontSize));
 
         String style = String.format(
