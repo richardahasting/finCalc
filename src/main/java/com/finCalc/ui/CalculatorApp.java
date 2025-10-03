@@ -200,7 +200,14 @@ public class CalculatorApp extends Application {
             createFinancialMenuItem("Required Minimum Distribution (RMD)", RequiredMinimumDistribution.INSTANCE)
         );
 
-        financialMenu.getItems().addAll(tvmMenu, investmentMenu, realEstateMenu, loanMenu, bondMenu, taxRetirementMenu);
+        // Options Trading submenu
+        Menu optionsMenu = new Menu("Options Trading");
+        optionsMenu.getItems().addAll(
+            createFinancialMenuItem("Annualized Option Return (AOPT)", AnnualizedOptionReturn.INSTANCE),
+            createFinancialMenuItem("Covered Call Return (CCR)", CoveredCallReturn.INSTANCE)
+        );
+
+        financialMenu.getItems().addAll(tvmMenu, investmentMenu, realEstateMenu, loanMenu, bondMenu, taxRetirementMenu, optionsMenu);
 
         // Stack Operations Menu
         Menu stackMenu = new Menu("Stack");
