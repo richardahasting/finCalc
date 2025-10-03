@@ -28,7 +28,7 @@ echo "Creating standalone app with jpackage..."
 jpackage \
   --input target \
   --name richCalc \
-  --main-jar finCalc-1.0.0-SNAPSHOT.jar \
+  --main-jar finCalc-1.0.0.jar \
   --main-class com.finCalc.ui.CalculatorApp \
   --type app-image \
   --module-path "$MODULE_PATH" \
