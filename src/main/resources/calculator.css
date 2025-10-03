@@ -1,0 +1,42 @@
+/* Menu Bar Styling */
+.menu-bar {
+    -fx-background-color: #1e1e1e;
+}
+
+.menu-bar .label {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+}
+
+.menu-bar .menu .label {
+    -fx-text-fill: white;
+}
+
+.menu-bar .menu:hover .label {
+    -fx-text-fill: white;
+}
+
+.menu-bar .menu:showing .label {
+    -fx-text-fill: white;
+}
+
+/* Menu Items */
+.context-menu {
+    -fx-background-color: #2d2d2d;
+}
+
+.menu-item {
+    -fx-background-color: #2d2d2d;
+}
+
+.menu-item .label {
+    -fx-text-fill: #cccccc;
+}
+
+.menu-item:focused {
+    -fx-background-color: #094771;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: white;
+}

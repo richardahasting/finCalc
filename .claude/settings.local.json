@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/richard/**)",
+      "Bash(tree:*)",
+      "Bash(mvn clean:*)",
+      "Bash(mvn test:*)",
+      "Bash(chmod:*)",
+      "Bash(mvn compile:*)",
+      "Bash(mvn:*)",
+      "Bash(xargs basename:*)",
+      "Bash(git checkout:*)",
+      "WebSearch",
+      "WebFetch(domain:www.nasdaq.com)",
+      "Bash(./build-mac-app.sh:*)",
+      "Bash(open:*)",
+      "Bash(/Users/richard/projects/finCalc/create-app-launcher.sh:*)",
+      "Bash(/Applications/finCalc.app/Contents/MacOS/finCalc:*)",
+      "Bash(./create-app-launcher.sh:*)",
+      "Bash(sips:*)",
+      "Bash(iconutil:*)",
+      "Bash(killall:*)",
+      "Bash(sudo rm:*)",
+      "Bash(/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister:*)",
+      "Bash(java:*)",
+      "Bash(gh repo clone:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
