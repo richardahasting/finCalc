@@ -102,7 +102,6 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  // Quit on all platforms (including macOS) since this is a single-window app
+  app.quit();
 });
