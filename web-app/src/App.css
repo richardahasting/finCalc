@@ -815,7 +815,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-xs);
-  margin-top: auto;
+  margin-top: var(--spacing-sm);
   padding-top: var(--spacing-sm);
 }
 
