@@ -1,154 +1,194 @@
-# finCalc / richCalc
+# finCalc
 
-A powerful financial calculator with RPN (Reverse Polish Notation) support, built with JavaFX.
+A powerful RPN (Reverse Polish Notation) financial calculator available as a web app, Electron desktop app, and native JavaFX application.
+
+## Live Demo
+
+**Web App**: [https://hastingtx.org/fincalc](https://hastingtx.org/fincalc)
 
 ## Features
 
-- **RPN Calculator**: Stack-based calculation system
-- **Financial Functions**: TVM (Time Value of Money) calculations including PMT, PV, FV, RATE, NPER
-- **Real Estate Analysis**: Cap Rate, NOI, Cash-on-Cash Return, DSCR, LTV, GRM, ROI, OER, EGI
-- **Investment Analysis**: IRR, CAGR, Break-Even Point, Profitability Index
-- **Bond Calculations**: YTM, Yield, Bond pricing
-- **Options Trading**: Annualized Option Return (AOPT), Covered Call Return (CCR)
-- **Scientific Functions**: Trigonometric, logarithmic, exponential functions
-- **Modern UI**: Color-coded buttons for easy function identification
-  - Green: TVM functions
-  - Blue: Real Estate metrics
-  - Gold: Bond functions
-  - Purple: Investment analysis
-  - Orange: Basic operators
-  - Red: Stack operations
-  - Gray: Scientific functions
+- **RPN Calculator**: Stack-based calculation system for efficient financial analysis
+- **53 Operations** across Basic, Scientific, and Financial categories
+- **Financial Functions**:
+  - TVM (Time Value of Money): PMT, PV, FV, RATE, NPER
+  - Real Estate: Cap Rate, NOI, Cash-on-Cash Return, DSCR, LTV, GRM, ROI, OER, EGI
+  - Investment Analysis: CAGR, Break-Even Point, Payback Period, Profitability Index
+  - Bond Calculations: Current Yield, YTM, Bond Price
+  - Loans: Remaining Balance, Total Interest, APR to APY, Debt-to-Income
+  - Tax & Retirement: Effective Tax Rate, After-Tax Return, RMD
+  - Options Trading: Annualized Option Return (AOPT), Covered Call Return (CCR)
+- **Scientific Functions**: Trig, logarithmic, exponential, power/root functions
+- **Precision Control**: Adjustable decimal precision (1-50 places)
+- **Dark Theme**: Modern UI with color-coded operation buttons
 
-## Building from Source
+## Quick Start
 
-### Prerequisites
+### Web App
+Visit [https://hastingtx.org/fincalc](https://hastingtx.org/fincalc) - no installation required.
 
-- Java 17 or higher
-- Maven 3.6+
-- JavaFX 21
-
-### Build and Run
-
+### Electron Desktop App (Linux/macOS)
 ```bash
-# Compile and run
+# From the web-app directory
+cd web-app
+npm install
+npm run electron
+```
+
+Or use the launcher script (if installed to ~/bin):
+```bash
+fincalc
+```
+
+### JavaFX Desktop App (macOS)
+```bash
+# Requires Java 17+ and Maven
 mvn clean compile javafx:run
-
-# Run tests
-mvn test
-
-# Build JAR with dependencies
-mvn clean package
 ```
-
-## macOS Applications
-
-### finCalc.app (Development - Requires Maven)
-
-Lightweight launcher that uses Maven to run the application.
-
-```bash
-# Create the app
-./create-app-launcher.sh
-
-# Install to Applications
-# Already installed at /Applications/finCalc.app
-```
-
-### richCalc.app (Standalone - No Dependencies)
-
-Fully standalone application with bundled Java runtime and JavaFX. Can run on any Mac without Java or Maven installed.
-
-```bash
-# Build standalone app
-./build-standalone-richCalc.sh
-```
-
-This creates a complete macOS app bundle at `/Applications/richCalc.app` that includes:
-- Bundled Java runtime
-- All JavaFX modules
-- Application icon
-- No external dependencies
 
 ## Project Structure
 
 ```
 finCalc/
-├── src/main/java/com/finCalc/
-│   ├── calculator/          # Core calculator engine
-│   │   ├── operations/      # Operation implementations
-│   │   │   ├── basic/       # Basic arithmetic
-│   │   │   ├── scientific/  # Scientific functions
-│   │   │   └── financial/   # Financial calculations
-│   │   ├── Stack.java       # RPN stack implementation
-│   │   └── StackEvaluator.java
-│   └── ui/
-│       └── CalculatorApp.java  # JavaFX UI
-├── src/test/java/           # Unit tests
-├── pom.xml                  # Maven configuration
-├── create-app-launcher.sh   # Create finCalc.app (requires Maven)
-└── build-standalone-richCalc.sh  # Create richCalc.app (standalone)
+├── web-app/                    # React/TypeScript web & Electron app
+│   ├── src/
+│   │   ├── App.tsx             # Main calculator UI
+│   │   ├── App.css             # Styling
+│   │   └── calculator/         # Calculator engine
+│   │       ├── types.ts        # TypeScript types
+│   │       ├── index.ts        # Stack evaluator
+│   │       └── operations/     # Operation implementations
+│   │           ├── basic/      # +, -, ×, ÷, ABS, MOD
+│   │           ├── scientific/ # Trig, log, exp, power
+│   │           └── financial/  # TVM, real estate, bonds, etc.
+│   ├── electron/
+│   │   └── main.cjs            # Electron main process
+│   ├── package.json
+│   └── vite.config.ts
+│
+├── src/main/java/              # JavaFX application
+│   └── com/finCalc/
+│       ├── calculator/         # Java calculator engine
+│       └── ui/                 # JavaFX UI
+│
+├── src/test/java/              # JUnit tests (530+ tests)
+└── pom.xml                     # Maven configuration
 ```
 
-## Usage
+## Development
 
-### RPN Calculation Example
+### Web App / Electron
 
-To calculate: (10 + 20) × 3
+```bash
+cd web-app
 
-1. Enter: `10`
-2. Enter: `20`
-3. Press: `+`
-4. Enter: `3`
-5. Press: `×`
-6. Result: `90`
+# Install dependencies
+npm install
 
-### Financial Calculation Example
+# Development server (hot reload)
+npm run dev
 
-Calculate monthly payment for a $300,000 loan at 6% annual interest for 30 years:
+# Electron development mode
+npm run electron:dev
 
-1. Enter: `300000` (loan amount)
-2. Press: `PV` (present value)
-3. Enter: `6`
-4. Press: `RATE` (annual interest rate)
-5. Enter: `30`
-6. Press: `NPER` (number of years)
-7. Press: `PMT` (calculate payment)
-8. Result: Monthly payment amount
+# Build for web deployment
+npm run build
 
-### Options Trading Example
+# Build for Electron (local use)
+npm run build:electron
 
-Calculate annualized return for selling a $12.50 put for $0.26 premium with 10 days to expiration:
+# Run Electron production build
+npm run electron
+```
 
-1. Enter: `12.50` (strike price)
-2. Enter: `0.26` (premium received)
-3. Enter: `10` (days to expiration)
-4. Press: `AOPT`
-5. Result: `0.7592` (75.92% annualized return)
+### JavaFX App
 
-Calculate covered call return: Buy stock at $50, sell $52 call for $1.50, 30 days to expiration:
+```bash
+# Build and run
+mvn clean compile javafx:run
 
-1. Enter: `50` (stock cost)
-2. Enter: `52` (strike price)
-3. Enter: `1.50` (premium received)
-4. Enter: `30` (days to expiration)
-5. Press: `CCR`
-6. Result: `0.8517` (85.17% annualized return if called away)
+# Run tests
+mvn test
+
+# Package as JAR
+mvn clean package
+```
+
+## Usage Examples
+
+### RPN Calculation
+Calculate: (10 + 20) × 3
+```
+10 ENTER
+20 +
+3 ×
+→ 90
+```
+
+### Mortgage Payment
+Calculate monthly payment for $300,000 at 6% for 30 years:
+```
+300000 ENTER    (loan amount)
+6 ENTER         (annual rate %)
+30 ENTER        (years)
+PMT
+→ $1,798.65
+```
+
+### Options: Cash-Secured Put
+Annualized return for $12.50 put, $0.26 premium, 10 days to expiration:
+```
+12.50 ENTER     (strike)
+0.26 ENTER      (premium)
+10 ENTER        (days)
+AOPT
+→ 75.92%
+```
+
+### Options: Covered Call
+Buy at $50, sell $52 call for $1.50, 30 days to expiration:
+```
+50 ENTER        (cost basis)
+52 ENTER        (strike)
+1.50 ENTER      (premium)
+30 ENTER        (days)
+CCR
+→ 85.17% (annualized if called)
+```
+
+## Deployment
+
+### Web Deployment
+```bash
+cd web-app
+npm run build
+# Copy dist/* to your web server
+```
+
+### Creating ~/bin Launcher (Linux)
+```bash
+#!/bin/bash
+cd /path/to/finCalc/web-app
+npm run build:electron
+NODE_ENV=production npx electron . --no-sandbox
+```
 
 ## Testing
 
-The project includes comprehensive unit tests:
-
 ```bash
+# Java tests (530+ unit tests)
 mvn test
+
+# Specific test class
+mvn test -Dtest=PaymentCalculationTest
 ```
 
-Test coverage includes:
-- Basic arithmetic operations
-- Scientific functions
-- Financial calculations (TVM, Real Estate, Bonds, Investment)
-- Stack operations
-- Error handling
+## Technology Stack
+
+- **Web/Electron**: React 19, TypeScript, Vite, Electron
+- **Desktop**: Java 17+, JavaFX 21
+- **Precision**: decimal.js (web), BigDecimal (Java)
+- **Testing**: JUnit 5
 
 ## License
 
