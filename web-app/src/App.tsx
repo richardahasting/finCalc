@@ -44,9 +44,17 @@ const WIZARD_OPERATIONS = new Set([
   // Time Value of Money
   'PMT', 'PV', 'FV', 'RATE', 'NPER',
   // Real Estate
-  'CAP', 'NOI', 'CoC', 'DSCR', 'LTV', 'GRM', 'ROI',
+  'CAP', 'NOI', 'CoC', 'DSCR', 'LTV', 'GRM', 'ROI', 'OER', 'EGI', 'CFAT', 'VAC', 'PPSF', 'RPSF',
   // Investment Analysis
-  'CAGR', 'BEP', 'PI',
+  'CAGR', 'BEP', 'PI', 'PBP',
+  // Bonds
+  'YIELD', 'YTM', 'BPRC',
+  // Loans
+  'BAL', 'TINT', 'APY', 'DTI',
+  // Options
+  'AOPT', 'CCR',
+  // Tax & Retirement
+  'ETR', 'ATR', 'RMD',
 ]);
 
 // User-friendly tooltips for financial operations
@@ -65,10 +73,33 @@ const OPERATION_TOOLTIPS: Record<string, string> = {
   'LTV': 'Loan-to-Value - What % is financed?',
   'GRM': 'Gross Rent Multiplier - Price ÷ Annual Rent',
   'ROI': 'Return on Investment - Total gain percentage',
+  'OER': 'Operating Expense Ratio - Expenses ÷ Income',
+  'EGI': 'Effective Gross Income - After vacancy loss',
+  'CFAT': 'Cash Flow After Taxes - Net after tax',
+  'VAC': 'Vacancy Loss - Income lost to vacancies',
+  'PPSF': 'Price Per Square Foot - $/sqft',
+  'RPSF': 'Rent Per Square Foot - Rent/sqft annually',
   // Investment Analysis
   'CAGR': 'Compound Annual Growth - Average yearly return',
   'BEP': 'Break-Even Point - Units needed to cover costs',
   'PI': 'Profitability Index - Is the project worth it?',
+  'PBP': 'Payback Period - Years to recover investment',
+  // Bonds
+  'YIELD': 'Current Yield - Annual coupon ÷ price',
+  'YTM': 'Yield to Maturity - Total return if held to maturity',
+  'BPRC': 'Bond Price - Present value of cash flows',
+  // Loans
+  'BAL': 'Remaining Balance - Outstanding principal',
+  'TINT': 'Total Interest - Total interest over loan life',
+  'APY': 'APR to APY - Convert rate with compounding',
+  'DTI': 'Debt-to-Income - Monthly debt ÷ income',
+  // Options
+  'AOPT': 'Annualized Option Return - For cash-secured puts',
+  'CCR': 'Covered Call Return - Annualized if called away',
+  // Tax & Retirement
+  'ETR': 'Effective Tax Rate - Actual rate paid',
+  'ATR': 'After-Tax Return - Return after taxes',
+  'RMD': 'Required Minimum Distribution - IRA withdrawal',
 };
 
 function App() {
@@ -334,12 +365,58 @@ function App() {
         ['1/x', 'ABS', '', ''],
       ];
 
+  // Financial buttons organized by category with color coding
+  // Layout: 9 rows × 4 columns = 36 slots (34 operations + 2 empty)
   const financialButtons = [
+    // TVM (green) - 5 operations
     ['PMT', 'PV', 'FV', 'RATE'],
-    ['NPER', 'CAGR', 'ROI', 'PI'],
+    ['NPER', 'YIELD', 'YTM', 'BPRC'],  // NPER ends TVM, Bonds start
+    // Bonds (gold) - 3 operations, then Loans start
+    ['BAL', 'TINT', 'APY', 'DTI'],      // Loans (cyan) - 4 operations
+    // Real Estate (blue) - 12 operations
     ['CAP', 'NOI', 'CoC', 'DSCR'],
-    ['LTV', 'GRM', 'BEP', ''],
+    ['LTV', 'GRM', 'OER', 'EGI'],
+    ['CFAT', 'VAC', 'PPSF', 'RPSF'],
+    // Investment (purple) - 4 operations
+    ['ROI', 'CAGR', 'BEP', 'PI'],
+    ['PBP', 'AOPT', 'CCR', 'ETR'],     // Investment ends, Options (orange), Tax starts
+    // Tax & Retirement (rose) - 3 operations
+    ['ATR', 'RMD', '', ''],
   ];
+
+  // Financial button categories for color coding
+  const FINANCIAL_CATEGORIES: Record<string, string> = {
+    // Time Value of Money - Green
+    'PMT': 'tvm', 'PV': 'tvm', 'FV': 'tvm', 'RATE': 'tvm', 'NPER': 'tvm',
+    // Bonds - Gold
+    'YIELD': 'bonds', 'YTM': 'bonds', 'BPRC': 'bonds',
+    // Loans - Cyan
+    'BAL': 'loans', 'TINT': 'loans', 'APY': 'loans', 'DTI': 'loans',
+    // Real Estate - Blue
+    'CAP': 'realestate', 'NOI': 'realestate', 'CoC': 'realestate',
+    'DSCR': 'realestate', 'LTV': 'realestate', 'GRM': 'realestate',
+    'OER': 'realestate', 'EGI': 'realestate', 'CFAT': 'realestate',
+    'VAC': 'realestate', 'PPSF': 'realestate', 'RPSF': 'realestate',
+    // Investment Analysis - Purple
+    'ROI': 'investment', 'CAGR': 'investment', 'BEP': 'investment',
+    'PI': 'investment', 'PBP': 'investment',
+    // Options - Orange
+    'AOPT': 'options', 'CCR': 'options',
+    // Tax & Retirement - Rose
+    'ETR': 'tax', 'ATR': 'tax', 'RMD': 'tax',
+  };
+
+  const getFinancialButtonClass = (label: string) => {
+    const category = FINANCIAL_CATEGORIES[label];
+    if (category === 'tvm') return 'btn-financial-tvm';
+    if (category === 'bonds') return 'btn-financial-bonds';
+    if (category === 'loans') return 'btn-financial-loans';
+    if (category === 'realestate') return 'btn-financial-realestate';
+    if (category === 'investment') return 'btn-financial-investment';
+    if (category === 'options') return 'btn-financial-options';
+    if (category === 'tax') return 'btn-financial-tax';
+    return 'btn-financial';
+  };
 
   const getButtonClass = (label: string) => {
     if (['+', '-', '×', '÷', '*', '/'].includes(label)) return 'btn-operator';
@@ -582,7 +659,7 @@ function App() {
                     label ? (
                       <button
                         key={`${rowIndex}-${colIndex}`}
-                        className="calc-btn btn-financial"
+                        className={`calc-btn ${getFinancialButtonClass(label)}`}
                         title={OPERATION_TOOLTIPS[label] || label}
                         onClick={() => handleOperation(label)}
                         onContextMenu={(e) => {

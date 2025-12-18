@@ -77,6 +77,35 @@ export const OperationRegistry: Map<string, Calculation> = new Map([
   ['CAGR', Financial.CompoundAnnualGrowthRate],
   ['BEP', Financial.BreakEvenPoint],
   ['PI', Financial.ProfitabilityIndex],
+  ['PBP', Financial.PaybackPeriod],
+
+  // Financial - Bonds
+  ['YIELD', Financial.CurrentYield],
+  ['YTM', Financial.YieldToMaturity],
+  ['BPRC', Financial.BondPrice],
+
+  // Financial - Loans
+  ['BAL', Financial.RemainingBalance],
+  ['TINT', Financial.TotalInterestPaid],
+  ['APY', Financial.AprToApy],
+  ['DTI', Financial.DebtToIncomeRatio],
+
+  // Financial - Options
+  ['AOPT', Financial.AnnualizedOptionReturn],
+  ['CCR', Financial.CoveredCallReturn],
+
+  // Financial - Tax & Retirement
+  ['ETR', Financial.EffectiveTaxRate],
+  ['ATR', Financial.AfterTaxReturn],
+  ['RMD', Financial.RequiredMinimumDistribution],
+
+  // Financial - Real Estate (additional)
+  ['OER', Financial.OperatingExpenseRatio],
+  ['EGI', Financial.EffectiveGrossIncome],
+  ['CFAT', Financial.CashFlowAfterTaxes],
+  ['VAC', Financial.VacancyLoss],
+  ['PPSF', Financial.PricePerSquareFoot],
+  ['RPSF', Financial.RentPerSquareFoot],
 ]);
 
 /**
