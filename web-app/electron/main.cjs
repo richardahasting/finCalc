@@ -8,7 +8,7 @@ function createWindow() {
 
   const windowOptions = {
     width: 400,
-    height: 700,
+    height: 900,
     resizable: false,
     backgroundColor: '#0d0d10',
     webPreferences: {
