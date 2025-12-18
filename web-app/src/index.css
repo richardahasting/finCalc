@@ -1,0 +1,9 @@
+/* Base reset - App.css handles the detailed styling */
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
