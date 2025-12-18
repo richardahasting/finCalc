@@ -9,10 +9,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:electron": "ELECTRON=true tsc -b && ELECTRON=true vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "electron": "npm run build:electron && NODE_ENV=production electron .",
     "electron:dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
-    "electron:build": "npm run build && electron-builder"
+    "electron:build": "npm run build:electron && electron-builder"
   },
   "dependencies": {
     "decimal.js": "^10.6.0",

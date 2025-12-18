@@ -4,18 +4,26 @@ const path = require('path');
 const isDev = process.env.NODE_ENV !== 'production';
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  const isMac = process.platform === 'darwin';
+
+  const windowOptions = {
     width: 400,
     height: 700,
     resizable: false,
     backgroundColor: '#0d0d10',
-    titleBarStyle: 'hiddenInset',
-    trafficLightPosition: { x: 15, y: 15 },
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
     },
-  });
+  };
+
+  // macOS-specific styling
+  if (isMac) {
+    windowOptions.titleBarStyle = 'hiddenInset';
+    windowOptions.trafficLightPosition = { x: 15, y: 15 };
+  }
+
+  const mainWindow = new BrowserWindow(windowOptions);
 
   // Load the app
   if (isDev) {
