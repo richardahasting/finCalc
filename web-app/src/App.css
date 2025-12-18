@@ -869,17 +869,17 @@ body {
   box-shadow: 0 0 12px rgba(34, 211, 238, 0.2);
 }
 
-/* Financial - Options (Orange) */
+/* Financial - Options (Magenta/Fuchsia) */
 .calc-btn.btn-financial-options {
-  background: linear-gradient(135deg, #281a0a, #201407);
-  color: #fb923c;
+  background: linear-gradient(135deg, #280a28, #200720);
+  color: #e879f9;
   font-size: calc(0.7rem * var(--font-scale));
-  border-color: rgba(251, 146, 60, 0.2);
+  border-color: rgba(232, 121, 249, 0.2);
 }
 
 .calc-btn.btn-financial-options:hover {
-  border-color: rgba(251, 146, 60, 0.5);
-  box-shadow: 0 0 12px rgba(251, 146, 60, 0.2);
+  border-color: rgba(232, 121, 249, 0.5);
+  box-shadow: 0 0 12px rgba(232, 121, 249, 0.2);
 }
 
 /* Financial - Tax & Retirement (Rose) */
